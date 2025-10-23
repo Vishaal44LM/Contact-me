@@ -46,7 +46,7 @@ export default function ContactUs() {
 
       toast({
         title: "✅ Your message was sent successfully!",
-        description: "We'll get back to you as soon as possible.",
+        description: "I will get back to you as soon as possible.",
       });
 
       // Reset form
@@ -69,68 +69,69 @@ export default function ContactUs() {
   };
 
   return (
-    <section className="w-full py-16 px-4">
+    <section className="w-full min-h-screen py-16 px-4 bg-gradient-to-br from-background via-background to-muted/20">
       <div className="container max-w-2xl mx-auto">
-        <Card className="shadow-lg">
-          <CardHeader className="text-center">
-            <CardTitle className="text-3xl font-bold">Contact Us</CardTitle>
-            <CardDescription className="text-base mt-2">
-              Have a question? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+        <Card className="shadow-2xl border-2 animate-fade-in hover-scale backdrop-blur-sm bg-card/95">
+          <CardHeader className="text-center space-y-4 pb-8">
+            <CardTitle className="text-4xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+              Contact Me
+            </CardTitle>
+            <CardDescription className="text-base mt-2 text-muted-foreground">
+              Have a question? Love to hear from you. Send me a message and I will respond as soon as possible.
             </CardDescription>
           </CardHeader>
           
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="space-y-2">
-                <Label htmlFor="fullName">Full Name *</Label>
+              <div className="space-y-2 group">
+                <Label htmlFor="fullName" className="text-sm font-medium">Full Name *</Label>
                 <Input
                   id="fullName"
                   type="text"
-                  placeholder="John Doe"
                   required
                   value={formData.fullName}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                   disabled={isLoading}
+                  className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                 />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="email">Email Address *</Label>
+              <div className="space-y-2 group">
+                <Label htmlFor="email" className="text-sm font-medium">Email Address *</Label>
                 <Input
                   id="email"
                   type="email"
-                  placeholder="john@example.com"
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   disabled={isLoading}
+                  className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                 />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="subject">Subject</Label>
+              <div className="space-y-2 group">
+                <Label htmlFor="subject" className="text-sm font-medium">Subject</Label>
                 <Input
                   id="subject"
                   type="text"
-                  placeholder="How can we help?"
                   value={formData.subject}
                   onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                   disabled={isLoading}
+                  className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                 />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="message">Message *</Label>
+              <div className="space-y-2 group">
+                <Label htmlFor="message" className="text-sm font-medium">Message *</Label>
                 <Textarea
                   id="message"
-                  placeholder="Tell us more about your inquiry... (minimum 20 characters)"
                   required
                   minLength={20}
                   rows={6}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   disabled={isLoading}
-                  className="resize-none"
+                  className="resize-none transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                 />
                 <p className="text-xs text-muted-foreground">
                   {formData.message.length}/20 characters minimum
@@ -139,12 +140,12 @@ export default function ContactUs() {
 
               <Button 
                 type="submit" 
-                className="w-full" 
+                className="w-full h-12 text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]" 
                 disabled={isLoading}
               >
                 {isLoading ? (
                   <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                     Sending...
                   </>
                 ) : (
@@ -153,18 +154,25 @@ export default function ContactUs() {
               </Button>
             </form>
 
-            <div className="mt-8 pt-8 border-t space-y-3">
-              <h3 className="font-semibold text-lg">Get in Touch</h3>
-              <div className="flex items-center gap-3 text-muted-foreground">
-                <Mail className="h-5 w-5" />
-                <a href="mailto:veeeeshaaaal@gmail.com" className="hover:text-primary transition-colors">
-                  veeeeshaaaal@gmail.com
+            <div className="mt-10 pt-8 border-t border-border/50 space-y-4">
+              <h3 className="font-semibold text-lg flex items-center gap-2">
+                <span className="h-1 w-8 bg-primary rounded-full"></span>
+                Get in Touch
+              </h3>
+              <div className="space-y-3">
+                <a 
+                  href="mailto:veeeeshaaaal@gmail.com" 
+                  className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-all duration-300 p-3 rounded-lg hover:bg-muted/50 group"
+                >
+                  <Mail className="h-5 w-5 group-hover:scale-110 transition-transform" />
+                  <span className="font-medium">veeeeshaaaal@gmail.com</span>
                 </a>
-              </div>
-              <div className="flex items-center gap-3 text-muted-foreground">
-                <Phone className="h-5 w-5" />
-                <a href="tel:7305260551" className="hover:text-primary transition-colors">
-                  7305260551
+                <a 
+                  href="tel:7305260551" 
+                  className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-all duration-300 p-3 rounded-lg hover:bg-muted/50 group"
+                >
+                  <Phone className="h-5 w-5 group-hover:scale-110 transition-transform" />
+                  <span className="font-medium">7305260551</span>
                 </a>
               </div>
             </div>
