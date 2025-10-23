@@ -33,11 +33,13 @@ export default function ContactUs() {
     setIsLoading(true);
 
     try {
-      const { error } = await supabase.from("contacts").insert({
-        full_name: formData.fullName,
-        email: formData.email,
-        subject: formData.subject || null,
-        message: formData.message,
+      const { data, error } = await supabase.functions.invoke("send-contact-email", {
+        body: {
+          fullName: formData.fullName,
+          email: formData.email,
+          subject: formData.subject || null,
+          message: formData.message,
+        },
       });
 
       if (error) throw error;
