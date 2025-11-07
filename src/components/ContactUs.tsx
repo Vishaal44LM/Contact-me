@@ -35,14 +35,20 @@ export default function ContactUs() {
     try {
       const { data, error } = await supabase.functions.invoke("send-contact-email", {
         body: {
-          fullName: formData.fullName,
-          email: formData.email,
-          subject: formData.subject || null,
-          message: formData.message,
+          fullName: formData.fullName.trim(),
+          email: formData.email.trim(),
+          subject: formData.subject?.trim() || null,
+          message: formData.message.trim(),
         },
       });
 
-      if (error) throw error;
+      if (error) {
+        throw new Error(error.message || "Failed to invoke email function");
+      }
+
+      if (data && typeof data === "object" && "error" in data && (data as any).error) {
+        throw new Error((data as any).error);
+      }
 
       toast({
         title: "✅ Your message was sent successfully!",
